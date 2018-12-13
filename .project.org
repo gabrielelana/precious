@@ -1,0 +1,43 @@
+#+TITLE: Precious
+
+* PHPStan Support [0/3]
+Add custom rules for PHPStan
+
+- [ ] Add type hints to fields
+- [ ] Avoid assignment to fields
+- [ ] Precious class must be declared final
+
+* Validation [0/0]
+Add an optional validator to every field
+
+* Basic Functionalities [11/11]
+:LOGBOOK:
+CLOCK: [2018-12-13 Thu 17:44]--[2018-12-13 Thu 19:05] =>  1:21
+CLOCK: [2018-12-13 Thu 15:13]--[2018-12-13 Thu 17:11] =>  1:58
+:END:
+Basic functionalities
+
+- [X] Can describe required and optional fields
+- [X] Throws a ~MissingRequiredFieldException~ when a required field is missing
+- [X] Can read the fields as they where declared as public fields
+- [X] Cannot write a field (throws ~ReadOnlyFieldException~)
+- [X] Cannot read or write a field that is not declared (throws ~UnknownFieldException~)
+- [X] Fields are casted using their declared primitive type if the current type is different
+- [X] Can contain fields with custom types
+- [X] Can contain fields instance of ~Precious\Precious~ class
+- [X] ~Precious::set($name, $value)~ will create another value object
+- [X] Test for equality of value objects
+- [X] Cannot declare more fields with the same name (throws ~NameClashFieldException~)
+
+* Refile
+Tasks to be refiled in some other stories in this project
+
+- [ ] Extract ~Singleton~ and ~SingletonScaffold~ in its own project
+- [ ] ~Precious::get($name)~ but it's not type hinted
+- [ ] Cannot give more parameters than necessary (throws ~UnknownParameterException~)
+- [ ] Maybe be more strict and allow only primitive types and precious types?
+
+* Unrelated
+Tasks unrelated with this particular project
+
+- [ ] ...
