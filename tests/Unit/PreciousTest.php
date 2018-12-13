@@ -5,6 +5,9 @@ namespace Precious\Unit;
 use PHPUnit\Framework\TestCase;
 use Precious\Example\A;
 use Precious\Example\B;
+use Precious\Example\C;
+use Precious\Example\D;
+use SplStack;
 
 class PreciousTest extends TestCase
 {
@@ -96,5 +99,22 @@ class PreciousTest extends TestCase
             [['integer' => 1, 'float' => 1.1, 'boolean' => true, 'string' => 'foo', 'null' => null, 'mixed' => 'whatever', 'array' => 1]],
             [['integer' => 1, 'float' => 1.1, 'boolean' => true, 'string' => 'foo', 'null' => null, 'mixed' => 'whatever', 'array' => 'foo']],
         ];
+    }
+
+    public function testCanContainInstancesOfClasses()
+    {
+        $c = new C(['a' => new SplStack()]);
+        $this->assertInstanceOf(SplStack::class, $c->a);
+
+        $c->a->push(1);
+        $c->a->push(2);
+        $c->a->push(3);
+        $this->assertEquals([1, 2, 3], iterator_to_array($c->a));
+    }
+
+    public function testCanContainIntancesOfOtherPreciousObjects()
+    {
+        $d = new D(['c' => new C(['a' => new SplStack()])]);
+        $this->assertInstanceOf(SplStack::class, $d->c->a);
     }
 }

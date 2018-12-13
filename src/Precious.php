@@ -3,6 +3,7 @@
 namespace Precious;
 
 use Precious\Type\PrimitiveType;
+use Precious\Type\ClassType;
 use Precious\Type\Type;
 
 abstract class Precious
@@ -13,9 +14,9 @@ abstract class Precious
     private $parameters = [];
 
     /**
-     * @var array<Field>
+     * @var array<array<Field>>
      */
-    private static $fields;
+    private static $fields = [];
 
     /**
      * Returns a new instance of a value object
@@ -26,9 +27,11 @@ abstract class Precious
      */
     public function __construct(array $parameters = [])
     {
-        if (!self::$fields) self::$fields = $this->init();
+        if (!array_key_exists(static::class, self::$fields)) {
+            self::$fields[static::class] = $this->init();
+        }
         /** @var Field $field */
-        foreach (self::$fields as $field) {
+        foreach (self::$fields[static::class] as $field) {
             $this->parameters[$field->name()] = $field->pickIn($parameters);
         }
     }
@@ -84,14 +87,19 @@ abstract class Precious
         return PrimitiveType::stringType();
     }
 
+    protected static function nullType() : Type
+    {
+        return PrimitiveType::nullType();
+    }
+
     protected static function mixedType() : Type
     {
         return PrimitiveType::mixedType();
     }
 
-    protected static function nullType() : Type
+    protected static function instanceOf(string $class) : Type
     {
-        return PrimitiveType::nullType();
+        return ClassType::instanceOf($class);
     }
 
     /**
