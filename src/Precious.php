@@ -38,6 +38,14 @@ abstract class Precious
         }
     }
 
+    public function __get($name)
+    {
+        if (!array_key_exists($name, $this->parameters)) {
+            throw new UnknownFieldException("Unknown field `$name`");
+        }
+        return $this->parameters[$name];
+    }
+
     protected static function required(string $fieldName, string $fieldType) : Field
     {
         return new RequiredField($fieldName, $fieldType);
