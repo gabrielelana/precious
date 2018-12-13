@@ -35,7 +35,7 @@ class OptionalField extends RequiredField
     public function pickIn(array $parameters)
     {
         try {
-            parent::pickIn($parameters);
+            return parent::pickIn($parameters);
 
         } catch (MissingRequiredFieldException $e) {
             return $this->cast($this->defaultValue);
