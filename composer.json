@@ -1,0 +1,23 @@
+{
+    "name": "gabrielelana/precious",
+    "description": "Library to build value objects",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "gabriele.lana",
+            "email": "gabriele.lana@cleancode.it"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Precious\\": ["./src", "./tests"]
+        }
+    },
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^7.5",
+        "phpstan/phpstan": "^0.10.6"
+    }
+}
