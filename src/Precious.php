@@ -2,16 +2,11 @@
 
 namespace Precious;
 
+use Precious\Type\PrimitiveType;
+use Precious\Type\Type;
+
 abstract class Precious
 {
-    const INTEGER= 'INTEGER';
-    const FLOAT= 'FLOAT';
-    const BOOLEAN= 'BOOLEAN';
-    const ARRAY= 'ARRAY';
-    const OBJECT= 'OBJECT';
-    const NULL= 'NULL';
-    const STRING= 'STRING';
-
     /**
      * @var array
      */
@@ -54,14 +49,49 @@ abstract class Precious
         throw new ReadOnlyFieldException("Cannot write field `$name`");
     }
 
-    protected static function required(string $fieldName, string $fieldType) : Field
+    protected static function required(string $fieldName, Type $fieldType) : Field
     {
         return new RequiredField($fieldName, $fieldType);
     }
 
-    protected static function optional(string $fieldName, string $fieldType, $defaultValue = null) : Field
+    protected static function optional(string $fieldName, Type $fieldType, $defaultValue = null) : Field
     {
         return new OptionalField($fieldName, $fieldType, $defaultValue);
+    }
+
+    protected static function integerType() : Type
+    {
+        return PrimitiveType::integerType();
+    }
+
+    protected static function floatType() : Type
+    {
+        return PrimitiveType::floatType();
+    }
+
+    protected static function booleanType() : Type
+    {
+        return PrimitiveType::booleanType();
+    }
+
+    protected static function arrayType() : Type
+    {
+        return PrimitiveType::arrayType();
+    }
+
+    protected static function stringType() : Type
+    {
+        return PrimitiveType::stringType();
+    }
+
+    protected static function mixedType() : Type
+    {
+        return PrimitiveType::mixedType();
+    }
+
+    protected static function nullType() : Type
+    {
+        return PrimitiveType::nullType();
     }
 
     /**

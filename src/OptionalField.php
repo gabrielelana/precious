@@ -2,6 +2,8 @@
 
 namespace Precious;
 
+use Precious\Type\Type;
+
 class OptionalField extends RequiredField
 {
     /**
@@ -11,12 +13,12 @@ class OptionalField extends RequiredField
 
     /**
      * @var string $name
-     * @var string $type
+     * @var Type $type
      * @var mixed $defaultValue
      *
      * @returns self
      */
-    public function __construct(string $name, string $type, $defaultValue)
+    public function __construct(string $name, Type $type, $defaultValue)
     {
         parent::__construct($name, $type);
         $this->defaultValue = $defaultValue;
@@ -25,6 +27,7 @@ class OptionalField extends RequiredField
     /**
      * Returns the value of the field picked from an array of values
      *
+     * @throws WrongTypeFieldException
      * @throws MissingRequiredFieldException
      *
      * @returns mixed
@@ -35,7 +38,7 @@ class OptionalField extends RequiredField
             parent::pickIn($parameters);
 
         } catch (MissingRequiredFieldException $e) {
-            return $this->defaultValue;
+            return $this->cast($this->defaultValue);
         }
     }
 }

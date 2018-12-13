@@ -4,6 +4,7 @@ namespace Precious\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Precious\Example\A;
+use Precious\Example\B;
 
 class PreciousTest extends TestCase
 {
@@ -60,5 +61,40 @@ class PreciousTest extends TestCase
     {
         $a = new A(['a1' => 1, 'a2' => 'aaa', 'a3' => 2]);
         $a->a1 = 2;
+    }
+
+    /**
+     * @expectedException Precious\WrongTypeFieldException
+     * @expectedExceptionMessage Wrong type for field `a1`. Value of type `NULL` cannot be casted to `integer`
+     */
+    public function testWrongTypeMessage()
+    {
+        $a = new A(['a1' => null, 'a2' => 'aaa', 'a3' => 2]);
+    }
+
+    /**
+     * @expectedException Precious\WrongTypeFieldException
+     * @dataProvider wrongTypes
+     */
+    public function testWrongType($parameters)
+    {
+        $b = new B($parameters);
+    }
+
+    public function wrongTypes()
+    {
+        return [
+            // [['integer' => 1, 'float' => 1.1, 'boolean' => true, 'string' => 'foo', 'null' => null, 'mixed' => 'whatever', 'array' => [1, 2, 3]]],
+            [['integer' => 'foo', 'float' => 1.1, 'boolean' => true, 'string' => 'foo', 'null' => null, 'mixed' => 'whatever', 'array' => [1, 2, 3]]],
+            [['integer' => 1, 'float' => false, 'boolean' => true, 'string' => 'foo', 'null' => null, 'mixed' => 'whatever', 'array' => [1, 2, 3]]],
+            // [['integer' => 1, 'float' => 1.1, 'boolean' => null, 'string' => 'foo', 'null' => null, 'mixed' => 'whatever', 'array' => [1, 2, 3]]],
+            [['integer' => 1, 'float' => 1.1, 'boolean' => true, 'string' => [1, 2, 3], 'null' => null, 'mixed' => 'whatever', 'array' => [1, 2, 3]]],
+            [['integer' => 1, 'float' => 1.1, 'boolean' => true, 'string' => 'foo', 'null' => 5, 'mixed' => 'whatever', 'array' => [1, 2, 3]]],
+            [['integer' => 1, 'float' => 1.1, 'boolean' => true, 'string' => 'foo', 'null' => 'foo', 'mixed' => 'whatever', 'array' => [1, 2, 3]]],
+            // [['integer' => 1, 'float' => 1.1, 'boolean' => true, 'string' => 'foo', 'null' => null, 'mixed' => 'whatever', 'array' => [1, 2, 3]]],
+            [['integer' => 1, 'float' => 1.1, 'boolean' => true, 'string' => 'foo', 'null' => null, 'mixed' => 'whatever', 'array' => true]],
+            [['integer' => 1, 'float' => 1.1, 'boolean' => true, 'string' => 'foo', 'null' => null, 'mixed' => 'whatever', 'array' => 1]],
+            [['integer' => 1, 'float' => 1.1, 'boolean' => true, 'string' => 'foo', 'null' => null, 'mixed' => 'whatever', 'array' => 'foo']],
+        ];
     }
 }
