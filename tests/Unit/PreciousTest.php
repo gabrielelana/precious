@@ -41,4 +41,24 @@ class PreciousTest extends TestCase
         $a = new A(['a1' => 1, 'a2' => 'aaa', 'a3' => 2]);
         $a->a4;
     }
+
+    /**
+     * @expectedException Precious\UnknownFieldException
+     * @expectedExceptionMessage Unknown field `a4`
+     */
+    public function testCannotWriteUnknownFields()
+    {
+        $a = new A(['a1' => 1, 'a2' => 'aaa', 'a3' => 2]);
+        $a->a4 = 6;
+    }
+
+    /**
+     * @expectedException Precious\ReadOnlyFieldException
+     * @expectedExceptionMessage Cannot write field `a1`
+     */
+    public function testCannotWriteReadOnlyFields()
+    {
+        $a = new A(['a1' => 1, 'a2' => 'aaa', 'a3' => 2]);
+        $a->a1 = 2;
+    }
 }

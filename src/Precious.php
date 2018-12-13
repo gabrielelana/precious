@@ -46,6 +46,14 @@ abstract class Precious
         return $this->parameters[$name];
     }
 
+    public function __set($name, $value)
+    {
+        if (!array_key_exists($name, $this->parameters)) {
+            throw new UnknownFieldException("Unknown field `$name`");
+        }
+        throw new ReadOnlyFieldException("Cannot write field `$name`");
+    }
+
     protected static function required(string $fieldName, string $fieldType) : Field
     {
         return new RequiredField($fieldName, $fieldType);
