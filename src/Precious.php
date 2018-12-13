@@ -22,7 +22,8 @@ abstract class Precious
      * Returns a new instance of a value object
      *
      * @throws MissingRequiredFieldException
-     *
+     * @throws WrongTypeFieldException
+     * @throws MissingRequiredFieldException
      * @returns self
      */
     public function __construct(array $parameters = [])
@@ -34,6 +35,18 @@ abstract class Precious
         foreach (self::$fields[static::class] as $field) {
             $this->parameters[$field->name()] = $field->pickIn($parameters);
         }
+    }
+
+    /**
+     * @var string $name
+     * @var mixed $value
+     * @throws MissingRequiredFieldException
+     * @throws WrongTypeFieldException
+     * @returns self
+     */
+    public function set(string $name, $value) : self
+    {
+        return new static(array_merge($this->parameters, [$name => $value]));
     }
 
     public function __get($name)

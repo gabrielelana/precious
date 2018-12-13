@@ -38,7 +38,6 @@ class RequiredField implements Field
      *
      * @throws WrongTypeFieldException
      * @throws MissingRequiredFieldException
-     *
      * @returns mixed
      */
     public function pickIn(array $parameters)

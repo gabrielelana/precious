@@ -117,4 +117,21 @@ class PreciousTest extends TestCase
         $d = new D(['c' => new C(['a' => new SplStack()])]);
         $this->assertInstanceOf(SplStack::class, $d->c->a);
     }
+
+    public function testSetWillCreateAnotherObject()
+    {
+        $a1 = new A(['a1' => 1, 'a2' => 'aaa', 'a3' => 2]);
+        $a2 = $a1->set('a1', 2);
+        $this->assertNotSame($a1, $a2);
+    }
+
+    /**
+     * @expectedException Precious\WrongTypeFieldException
+     */
+    public function testSetWillTypeCheckAsWell()
+    {
+        $a1 = new A(['a1' => 1, 'a2' => 'aaa', 'a3' => 2]);
+        $a2 = $a1->set('a1', 'aaa');
+
+    }
 }
