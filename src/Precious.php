@@ -14,25 +14,27 @@ abstract class Precious
     private $parameters = [];
 
     /**
-     * @var array<array<Field>>
+     * @var array<Fields>
      */
     private static $fields = [];
 
     /**
      * Returns a new instance of a value object
      *
+     * @throws NameClashFieldException
+     * @throws MissingRequiredFieldException
      * @throws MissingRequiredFieldException
      * @throws WrongTypeFieldException
-     * @throws MissingRequiredFieldException
      * @returns self
      */
     public function __construct(array $parameters = [])
     {
         if (!array_key_exists(static::class, self::$fields)) {
-            self::$fields[static::class] = $this->init();
+            self::$fields[static::class] = new Fields($this->init());
         }
         /** @var Field $field */
         foreach (self::$fields[static::class] as $field) {
+            $pickedFieds[] = $field->name();
             $this->parameters[$field->name()] = $field->pickIn($parameters);
         }
     }

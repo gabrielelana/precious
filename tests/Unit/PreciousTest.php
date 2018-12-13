@@ -7,6 +7,7 @@ use Precious\Example\A;
 use Precious\Example\B;
 use Precious\Example\C;
 use Precious\Example\D;
+use Precious\Example\E;
 use SplStack;
 
 class PreciousTest extends TestCase
@@ -132,6 +133,22 @@ class PreciousTest extends TestCase
     {
         $a1 = new A(['a1' => 1, 'a2' => 'aaa', 'a3' => 2]);
         $a2 = $a1->set('a1', 'aaa');
+    }
 
+    public function testValueObjectMustBeEqualIfTheyHaveEqualValues()
+    {
+        $a1 = new A(['a1' => 1, 'a2' => 'aaa', 'a3' => 2]);
+        $a2 = new A(['a1' => 1, 'a2' => 'aaa', 'a3' => 2]);
+        $this->assertEquals($a1, $a2);
+        $this->assertNotSame($a1, $a2);
+    }
+
+    /**
+     * @expectedException Precious\NameClashFieldException
+     * @expectedExceptionMessage Cannot redeclare field `a`
+     */
+    public function testCannotHaveMoreThanOneFieldWithTheSameName()
+    {
+        new E(['a' => 1]);
     }
 }
