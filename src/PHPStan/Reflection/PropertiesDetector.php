@@ -149,7 +149,7 @@ class PropertiesDetector extends NodeVisitorAbstract
             return;
         }
         if ($node instanceof ClassMethod && $this->inPreciousClass && $node->isProtected() && 'init' === (string) $node->name) {
-            $this->inPreciousClassInitMethod = $node;
+            $this->inPreciousClassInitMethod = null;
             // echo '< Precious init method' . PHP_EOL;
             return;
         }
