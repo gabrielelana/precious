@@ -1,0 +1,2 @@
+  rules:
+    - Precious\PHPStan\Rule\PreciousClassMustBeFinalRule

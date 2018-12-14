@@ -1,11 +1,12 @@
 #+TITLE: Precious
 
-* PHPStan Support [0/3]
+* PHPStan Support [1/4]
 Add custom rules for PHPStan
 
+- [X] Precious class must be declared final
 - [ ] Add type hints to fields
 - [ ] Avoid assignment to fields
-- [ ] Precious class must be declared final
+- [ ] Add PHPStan as dependency
 
 * Validation [0/0]
 Add an optional validator to every field

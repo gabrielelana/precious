@@ -1,4 +1,8 @@
+includes:
+  - rules.neon
+
 parameters:
   level: 7
   excludes_analyse:
     - %currentWorkingDirectory%/vendor/
+    - %currentWorkingDirectory%/tests/*/data/*
