@@ -17,7 +17,8 @@
     },
     "autoload-dev": {
 	"classmap": [
-            "tests/Rule/data/"
+            "tests/data/",
+            "tests/PHPStan/Rule/data/"
         ]
     },
     "require": {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Precious\Rule;
+namespace Precious\PHPStan\Rule;
 
 use Precious\PHPStan\Rule\PreciousClassMustBeFinalRule;
 use PHPStan\Testing\RuleTestCase;

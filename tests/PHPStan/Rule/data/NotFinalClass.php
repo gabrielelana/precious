@@ -1,6 +1,6 @@
 <?php
 
-namespace PreciousClassMustBeFinalRule;
+namespace Precious\Example;
 
 use Precious\Precious;
 

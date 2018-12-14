@@ -1,6 +1,6 @@
 <?php
 
-namespace Precious\Unit;
+namespace Precious;
 
 use PHPUnit\Framework\TestCase;
 use Precious\Example\A;
