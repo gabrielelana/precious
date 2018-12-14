@@ -62,7 +62,7 @@ composer require gabrielelana/precious
 ## PHPStan
 
 Another problem of solutions where you generate properties based on
-some kind of definitions is that you will loose reference on the types
+some kind of definitions is that you will lose reference on the types
 of those properties (by defining accessor methods by hand you will not
 but you will have a lot of boilerplate code).
 
