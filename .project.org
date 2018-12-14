@@ -1,15 +1,18 @@
 #+TITLE: Precious
 
-* PHPStan Support [1/4]
+* Validation [0/0]
+Add an optional validator to every field
+
+* PHPStan Support [4/4]
+:LOGBOOK:
+CLOCK: [2018-12-14 Fri 09:04]--[2018-12-14 Fri 14:57] =>  5:53
+:END:
 Add custom rules for PHPStan
 
 - [X] Precious class must be declared final
-- [ ] Add type hints to fields
-- [ ] Avoid assignment to fields
-- [ ] Add PHPStan as dependency
-
-* Validation [0/0]
-Add an optional validator to every field
+- [X] Add type hints to fields
+- [X] Avoid assignment to fields
+- [X] Add PHPStan as dependency
 
 * Basic Functionalities [11/11]
 :LOGBOOK:
@@ -34,9 +37,11 @@ Basic functionalities
 Tasks to be refiled in some other stories in this project
 
 - [ ] Extract ~Singleton~ and ~SingletonScaffold~ in its own project
-- [ ] ~Precious::get($name)~ but it's not type hinted
+- [ ] ~Precious::get($name)~ with type from PHPStan ~DynamicMethodReturnTypeExtension~
 - [ ] Cannot give more parameters than necessary (throws ~UnknownParameterException~)
 - [ ] Maybe be more strict and allow only primitive types and precious types?
+- [ ] ~PropertiesDetector~ on a file without ~Precious~ classes
+- [ ] ~PropertiesDetector~ on a file with multiple ~Precious~ classes
 
 * Unrelated
 Tasks unrelated with this particular project

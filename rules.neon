@@ -1,2 +1,8 @@
-  rules:
-    - Precious\PHPStan\Rule\PreciousClassMustBeFinalRule
+services:
+  -
+    class: Precious\PHPStan\Reflection\PreciousPropertiesClassReflectionExtension
+    tags:
+      - phpstan.broker.propertiesClassReflectionExtension
+
+rules:
+  - Precious\PHPStan\Rule\PreciousClassMustBeFinalRule
