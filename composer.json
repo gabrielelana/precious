@@ -20,9 +20,16 @@
             "tests/Rule/data/"
         ]
     },
-    "require": {},
+    "require": {
+        "php": "~7.1"
+    },
+    "suggest": {
+        "phpstan/phpstan": "^0.10",
+        "nikic/php-parser": "^4.1"
+    },
     "require-dev": {
         "phpunit/phpunit": "^7.5",
-        "phpstan/phpstan": "^0.10.6"
+        "phpstan/phpstan": "^0.10",
+        "nikic/php-parser": "^4.1"
     }
 }
