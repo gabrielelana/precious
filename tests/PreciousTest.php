@@ -151,4 +151,13 @@ class PreciousTest extends TestCase
     {
         new E(['a' => 1]);
     }
+
+    public function testHasField()
+    {
+        $a1 = new A(['a1' => 1, 'a2' => 'aaa', 'a3' => 2]);
+        $this->assertTrue($a1->has('a1'));
+        $this->assertTrue($a1->has('a2'));
+        $this->assertTrue($a1->has('a3'));
+        $this->assertFalse($a1->has('a4'));
+    }
 }

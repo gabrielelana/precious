@@ -51,6 +51,15 @@ abstract class Precious
         return new static(array_merge($this->parameters, [$name => $value]));
     }
 
+    /**
+     * @var string $name
+     * @returns bool
+     */
+    public function has(string $name) : bool
+    {
+        return array_key_exists($name, $this->parameters);
+    }
+
     public function __get($name)
     {
         if (!array_key_exists($name, $this->parameters)) {
