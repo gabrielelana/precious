@@ -34,7 +34,6 @@ abstract class Precious
         }
         /** @var Field $field */
         foreach (self::$fields[static::class] as $field) {
-            $pickedFieds[] = $field->name();
             $this->parameters[$field->name()] = $field->pickIn($parameters);
         }
     }
