@@ -8,6 +8,7 @@ use Precious\Example\B;
 use Precious\Example\C;
 use Precious\Example\D;
 use Precious\Example\E;
+use Precious\Example\F;
 use SplStack;
 
 class PreciousTest extends TestCase
@@ -159,5 +160,32 @@ class PreciousTest extends TestCase
         $this->assertTrue($a1->has('a2'));
         $this->assertTrue($a1->has('a3'));
         $this->assertFalse($a1->has('a4'));
+    }
+
+    public function optionalFieldOfEveryTypeCanBeNull()
+    {
+        $f = new F([]);
+        $this->assertNull($f->a);
+        $this->assertNull($f->b);
+        $this->assertNull($f->c);
+        $this->assertNull($f->d);
+        $this->assertNull($f->e);
+        $this->assertNull($f->f);
+        $this->assertNull($f->g);
+        $this->assertNull($f->h);
+
+        $f = new F([
+            'a' => null, 'b' => null, 'c' => null,
+            'd' => null, 'e' => null, 'f' => null,
+            'g' => null, 'h' => null
+        ]);
+        $this->assertNull($f->a);
+        $this->assertNull($f->b);
+        $this->assertNull($f->c);
+        $this->assertNull($f->d);
+        $this->assertNull($f->e);
+        $this->assertNull($f->f);
+        $this->assertNull($f->g);
+        $this->assertNull($f->h);
     }
 }

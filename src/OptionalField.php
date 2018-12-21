@@ -38,7 +38,17 @@ class OptionalField extends RequiredField
             return parent::pickIn($parameters);
 
         } catch (MissingRequiredFieldException $e) {
+            if (null === $this->defaultValue) {
+                return null;
+            }
             return $this->cast($this->defaultValue);
+
+        } catch (WrongTypeFieldException $e) {
+            if (null === $this->defaultValue) {
+                return null;
+            }
+            throw $e;
+
         }
     }
 }
