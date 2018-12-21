@@ -10,11 +10,13 @@ use PHPStan\Type\MixedType;
 use PHPStan\Type\NullType;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\StringType;
+use PHPStan\Type\UnionType;
 use PHPUnit\Framework\TestCase;
+use Precious\Example\FullyQualifiedClassNameBarrage;
 use Precious\Example\OneOptionalProperty;
+use Precious\Example\OneOptionalNullableProperty;
 use Precious\Example\OneRequiredProperty;
 use Precious\Example\OneRequiredPropertyPerType;
-use Precious\Example\FullyQualifiedClassNameBarrage;
 
 class PropertiesDetectorTest extends TestCase
 {
@@ -38,6 +40,17 @@ class PropertiesDetectorTest extends TestCase
         $properties = $properties[OneOptionalProperty::class];
         $this->assertCount(1, $properties);
         $this->assertEquals($properties['a'], new Property('a', new IntegerType()));
+    }
+
+    public function testOneOptionalNullableProperty()
+    {
+        $properties = PropertiesDetector::inFile(__DIR__ . '/data/OneOptionalNullableProperty.php');
+        $this->assertCount(1, $properties);
+        $this->assertArrayHasKey(OneOptionalNullableProperty::class, $properties);
+
+        $properties = $properties[OneOptionalNullableProperty::class];
+        $this->assertCount(1, $properties);
+        $this->assertEquals($properties['a'], new Property('a', new UnionType([new NullType(), new IntegerType()])));
     }
 
     public function testOneRequiredPropertyPerType()

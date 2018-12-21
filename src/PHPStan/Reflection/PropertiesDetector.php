@@ -12,6 +12,7 @@ use PHPStan\Type\NullType;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\StringType;
 use PHPStan\Type\Type;
+use PHPStan\Type\UnionType;
 use PhpParser\Node;
 use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitorAbstract;
@@ -123,10 +124,15 @@ class PropertiesDetector extends NodeVisitorAbstract
         if ($node instanceof StaticCall && $this->inPreciousClassInitMethod) {
             if ($node->name instanceof Identifier && ('required' === (string) $node->name || 'optional' == (string) $node->name)) {
                 // TODO: throw exception if arguments are not what we expect
+                $isOptional = ((string) $node->name) === 'optional';
+                $hasDefault = count($node->args) === 3;
                 assert($node->args[0]->value instanceof String_);
                 $propertyName = $this->extractPropertyName($node->args[0]->value);
                 assert($node->args[1]->value instanceof StaticCall);
                 $propertyType = $this->extractPropertyType($node->args[1]->value);
+                if ($isOptional && !$hasDefault) {
+                    $propertyType = new UnionType([new NullType(), $propertyType]);
+                }
                 assert($this->inPreciousClass instanceof Class_);
                 $className = (string) $this->inPreciousClass->namespacedName;
                 if (!array_key_exists($className, $this->properties)) {
