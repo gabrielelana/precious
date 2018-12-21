@@ -20,8 +20,11 @@ class StringType extends PrimitiveType
         if (is_string($value)) {
             return $value;
         }
-        if (is_numeric($value) || is_bool($value) || is_null($value)) {
+        if (is_numeric($value)) {
             return (string) $value;
+        }
+        if (is_bool($value)) {
+            return $value ? 'true' : 'false';
         }
         if (method_exists($value, '__toString')) {
             return $value->__toString();
