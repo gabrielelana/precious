@@ -13,7 +13,7 @@ class ClassType implements Type
 
     public static function instanceOf(string $class) : self
     {
-        if (!class_exists($class)) {
+        if (!class_exists($class) && !interface_exists($class)) {
             throw new Exception("Unknown class {$class}");
         }
         return new self($class);
