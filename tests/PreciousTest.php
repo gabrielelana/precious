@@ -162,6 +162,14 @@ class PreciousTest extends TestCase
         $this->assertFalse($a1->has('a4'));
     }
 
+    public function testGetField()
+    {
+        $a1 = new A(['a1' => 1, 'a2' => 'aaa', 'a3' => 2]);
+        $this->assertEquals(1, $a1->get('a1'));
+        $this->assertEquals('aaa', $a1->get('a2'));
+        $this->assertEquals(2, $a1->get('a3'));
+    }
+
     public function optionalFieldOfEveryTypeCanBeNull()
     {
         $f = new F([]);

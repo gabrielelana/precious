@@ -59,6 +59,20 @@ abstract class Precious
         return array_key_exists($name, $this->parameters);
     }
 
+    /**
+     * Unsafe version, use only as last resource
+     *
+     * @var string $name
+     * @returns mixed The field value or null if missing
+     */
+    public function get(string $name)
+    {
+        if (!array_key_exists($name, $this->parameters)) {
+            return null;
+        }
+        return $this->parameters[$name];
+    }
+
     public function __get($name)
     {
         if (!array_key_exists($name, $this->parameters)) {
