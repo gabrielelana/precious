@@ -33,6 +33,9 @@ class ClassType implements Type
      */
     public function cast($value)
     {
+        if (is_null($value)) {
+            return null;
+        }
         if (!($value instanceof $this->class)) {
             $currentClass = get_class($value);
             throw new WrongTypeException(
