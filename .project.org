@@ -36,12 +36,33 @@ Basic functionalities
 * Refile
 Tasks to be refiled in some other stories in this project
 
+- [ ] In ~self::arrayType()~ can specify type of keys and type of values
+- [ ] ~self::unionType([...])~
+- [ ] Better type ~Precious::set~ method return type
+  #+BEGIN_QUOTE
+  This issue happens and is reported a lot but it’s a problem of the
+  source code - you have no guarantee that “foo” will return “B” because
+  “self” is “A”. You should use @return static or @return $this phpDoc
+  with the addition of native “self”.
+  #+END_QUOTE
+- [ ] Implement a generic ~__toString()~
+- [ ] Turn ~init~ method to ~static~???
+- [ ] Format in compact style
+- [ ] Release version ~0.1~
+- [ ] Precious: rule to say that it is safe to do the following
+  #+BEGIN_EXAMPLE
+  if ($p->has('foo')) {
+    $p->get('foo'); // safe with mixed type
+  }
+  if ($p->has('foo', Precious::integerType())) {
+    $p->('foo'); // safe with integer type
+  }
+  #+END_EXAMPLE
 - [ ] Extract ~Singleton~ and ~SingletonScaffold~ in its own project
-- [ ] ~Precious::get($name)~ with type from PHPStan ~DynamicMethodReturnTypeExtension~
 - [ ] Cannot give more parameters than necessary (throws ~UnknownParameterException~)
 - [ ] Maybe be more strict and allow only primitive types and precious types?
-- [ ] ~PropertiesDetector~ on a file without ~Precious~ classes
-- [ ] ~PropertiesDetector~ on a file with multiple ~Precious~ classes
+- [ ] Tests for ~PropertiesDetector~ on a file without ~Precious~ classes
+- [ ] Tests for ~PropertiesDetector~ on a file with multiple ~Precious~ classes
 
 * Unrelated
 Tasks unrelated with this particular project
