@@ -13,6 +13,7 @@ use Precious\Example\C;
 use Precious\Example\D;
 use Precious\Example\E;
 use Precious\Example\F;
+use Precious\Example\G;
 use SplStack;
 
 class PreciousTest extends TestCase
@@ -192,5 +193,30 @@ class PreciousTest extends TestCase
         $this->assertNull($f->f);
         $this->assertNull($f->g);
         $this->assertNull($f->h);
+    }
+
+    public function testJsonSerialisation()
+    {
+        $a = new A(['a1' => 2, 'a2' => 'foo']);
+        $this->assertSame(
+            [
+                'a1' => 2,
+                'a2' => 'foo',
+                'a3' => 0,
+            ],
+            (array)json_decode((string)json_encode($a), true)
+        );
+
+        $g = new G(['a' => $a]);
+        $this->assertSame(
+            [
+                'a' => [
+                    'a1' => 2,
+                    'a2' => 'foo',
+                    'a3' => 0,
+                ],
+            ],
+            (array)json_decode((string)json_encode($g), true)
+        );
     }
 }

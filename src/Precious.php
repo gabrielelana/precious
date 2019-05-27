@@ -5,8 +5,9 @@ namespace Precious;
 use Precious\Type\PrimitiveType;
 use Precious\Type\ClassType;
 use Precious\Type\Type;
+use JsonSerializable;
 
-abstract class Precious
+abstract class Precious implements JsonSerializable
 {
     /**
      * @var array
@@ -87,6 +88,11 @@ abstract class Precious
             throw new UnknownFieldException("Unknown field `$name`");
         }
         throw new ReadOnlyFieldException("Cannot write field `$name`");
+    }
+
+    public function jsonSerialize(): array
+    {
+        return $this->parameters;
     }
 
     protected static function required(string $fieldName, Type $fieldType) : Field
