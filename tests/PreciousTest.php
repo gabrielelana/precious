@@ -3,31 +3,34 @@
 namespace Precious;
 
 use PHPUnit\Framework\TestCase;
+use Precious\MissingRequiredFieldException;
+use Precious\UnknownFieldException;
+use Precious\ReadOnlyFieldException;
+use Precious\WrongTypeFieldException;
 use Precious\Example\A;
 use Precious\Example\B;
 use Precious\Example\C;
 use Precious\Example\D;
 use Precious\Example\E;
 use Precious\Example\F;
+use Precious\Example\G;
 use SplStack;
 
 class PreciousTest extends TestCase
 {
-    /**
-     * @expectedException Precious\MissingRequiredFieldException
-     * @expectedExceptionMessage Missing required field `a1`
-     */
     public function testMissingRequiredField()
     {
+        $this->expectException(MissingRequiredFieldException::class);
+        $this->expectExceptionMessage('Missing required field `a1`');
+
         $a = new A();
     }
 
-    /**
-     * @expectedException Precious\MissingRequiredFieldException
-     * @expectedExceptionMessage Missing required field `a2`
-     */
     public function testWillComplainOnTheFirstMissingRequidfield()
     {
+        $this->expectException(MissingRequiredFieldException::class);
+        $this->expectExceptionMessage('Missing required field `a2`');
+
         $a = new A(['a1' => 1]);
     }
 
@@ -38,51 +41,48 @@ class PreciousTest extends TestCase
         $this->assertEquals(1, $a->a1);
     }
 
-    /**
-     * @expectedException Precious\UnknownFieldException
-     * @expectedExceptionMessage Unknown field `a4`
-     */
     public function testCannotReadUnkownFields()
     {
+        $this->expectException(UnknownFieldException::class);
+        $this->expectExceptionMessage('Unknown field `a4`');
+
         $a = new A(['a1' => 1, 'a2' => 'aaa', 'a3' => 2]);
         $a->a4;
     }
 
-    /**
-     * @expectedException Precious\UnknownFieldException
-     * @expectedExceptionMessage Unknown field `a4`
-     */
     public function testCannotWriteUnknownFields()
     {
+        $this->expectException(UnknownFieldException::class);
+        $this->expectExceptionMessage('Unknown field `a4`');
+
         $a = new A(['a1' => 1, 'a2' => 'aaa', 'a3' => 2]);
         $a->a4 = 6;
     }
 
-    /**
-     * @expectedException Precious\ReadOnlyFieldException
-     * @expectedExceptionMessage Cannot write field `a1`
-     */
     public function testCannotWriteReadOnlyFields()
     {
+        $this->expectException(ReadOnlyFieldException::class);
+        $this->expectExceptionMessage('Cannot write field `a1`');
+
         $a = new A(['a1' => 1, 'a2' => 'aaa', 'a3' => 2]);
         $a->a1 = 2;
     }
 
-    /**
-     * @expectedException Precious\WrongTypeFieldException
-     * @expectedExceptionMessage Wrong type for field `a1`. Value of type `NULL` cannot be casted to `integer`
-     */
     public function testWrongTypeMessage()
     {
+        $this->expectException(WrongTypeFieldException::class);
+        $this->expectExceptionMessage('Wrong type for field `a1`. Value of type `NULL` cannot be casted to `integer`');
+
         $a = new A(['a1' => null, 'a2' => 'aaa', 'a3' => 2]);
     }
 
     /**
-     * @expectedException Precious\WrongTypeFieldException
      * @dataProvider wrongTypes
      */
     public function testWrongType($parameters)
     {
+        $this->expectException(WrongTypeFieldException::class);
+
         $b = new B($parameters);
     }
 
@@ -127,11 +127,10 @@ class PreciousTest extends TestCase
         $this->assertNotSame($a1, $a2);
     }
 
-    /**
-     * @expectedException Precious\WrongTypeFieldException
-     */
     public function testSetWillTypeCheckAsWell()
     {
+        $this->expectException(WrongTypeFieldException::class);
+
         $a1 = new A(['a1' => 1, 'a2' => 'aaa', 'a3' => 2]);
         $a2 = $a1->set('a1', 'aaa');
     }
@@ -144,12 +143,11 @@ class PreciousTest extends TestCase
         $this->assertNotSame($a1, $a2);
     }
 
-    /**
-     * @expectedException Precious\NameClashFieldException
-     * @expectedExceptionMessage Cannot redeclare field `a`
-     */
     public function testCannotHaveMoreThanOneFieldWithTheSameName()
     {
+        $this->expectException(NameClashFieldException::class);
+        $this->expectExceptionMessage('Cannot redeclare field `a`');
+
         new E(['a' => 1]);
     }
 
@@ -195,5 +193,30 @@ class PreciousTest extends TestCase
         $this->assertNull($f->f);
         $this->assertNull($f->g);
         $this->assertNull($f->h);
+    }
+
+    public function testJsonSerialisation()
+    {
+        $a = new A(['a1' => 2, 'a2' => 'foo']);
+        $this->assertSame(
+            [
+                'a1' => 2,
+                'a2' => 'foo',
+                'a3' => 0,
+            ],
+            (array)json_decode((string)json_encode($a), true)
+        );
+
+        $g = new G(['a' => $a]);
+        $this->assertSame(
+            [
+                'a' => [
+                    'a1' => 2,
+                    'a2' => 'foo',
+                    'a3' => 0,
+                ],
+            ],
+            (array)json_decode((string)json_encode($g), true)
+        );
     }
 }

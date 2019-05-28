@@ -26,12 +26,12 @@
         "php": "~7.1"
     },
     "suggest": {
-        "phpstan/phpstan": "^0.10",
+        "phpstan/phpstan": "^0.11",
         "nikic/php-parser": "^4.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.5",
-        "phpstan/phpstan": "^0.10",
+        "phpunit/phpunit": "^8.0",
+        "phpstan/phpstan": "^0.11",
         "nikic/php-parser": "^4.1"
     }
 }
