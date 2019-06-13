@@ -29,12 +29,18 @@ class ClassType implements Type
      *
      * @throws WrongTypeException
      *
-     * @returns object
+     * @return object
      */
     public function cast($value)
     {
         if (is_null($value)) {
             return null;
+        }
+        if (!is_object($value)) {
+            $type = gettype($value);
+            throw new WrongTypeException(
+                "Value is not an instance of `{$this->class}` but a `{$type}`"
+            );
         }
         if (!($value instanceof $this->class)) {
             $currentClass = get_class($value);

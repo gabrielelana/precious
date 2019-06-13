@@ -120,6 +120,13 @@ class PreciousTest extends TestCase
         $this->assertInstanceOf(SplStack::class, $d->c->a);
     }
 
+    public function testNonClassInClassField()
+    {
+        $this->expectException(WrongTypeFieldException::class);
+        $this->expectExceptionMessage('Wrong type for field `c`. '.'Value is not an instance of `Precious\Example\C` but a `string`');
+        $d = new D(['c' => 'buzz']);
+    }
+
     public function testSetWillCreateAnotherObject()
     {
         $a1 = new A(['a1' => 1, 'a2' => 'aaa', 'a3' => 2]);
