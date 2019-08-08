@@ -90,6 +90,11 @@ abstract class Precious implements JsonSerializable
         throw new ReadOnlyFieldException("Cannot write field `$name`");
     }
 
+    public function __isset($name): bool
+    {
+        return array_key_exists($name, $this->parameters);
+    }
+
     public function jsonSerialize(): array
     {
         return $this->parameters;

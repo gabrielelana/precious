@@ -226,4 +226,11 @@ class PreciousTest extends TestCase
             (array)json_decode((string)json_encode($g), true)
         );
     }
+
+    public function testIsset()
+    {
+        $f = new F(['a' => 42]);
+        $this->assertTrue(isset($f->a), '$f->a is set');
+        $this->assertTrue(isset($f->b), '$f->b is set');
+    }
 }
