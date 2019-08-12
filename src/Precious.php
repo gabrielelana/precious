@@ -146,7 +146,7 @@ abstract class Precious implements JsonSerializable
     }
 
     /**
-     * @returns array<Field>
+     * @return Field[]
      */
     abstract protected function init() : array;
 }
