@@ -29,7 +29,7 @@ trait SingletonScaffold
     }
 
     /**
-     * @returns self
+     * @returns static
      */
     public static function instance()
     {

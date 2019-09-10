@@ -44,9 +44,9 @@ abstract class Precious implements JsonSerializable
      * @var mixed $value
      * @throws MissingRequiredFieldException
      * @throws WrongTypeFieldException
-     * @returns self
+     * @returns static
      */
-    public function set(string $name, $value) : self
+    public function set(string $name, $value)
     {
         return new static(array_merge($this->parameters, [$name => $value]));
     }
