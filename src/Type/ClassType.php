@@ -29,7 +29,7 @@ class ClassType implements Type
      *
      * @throws WrongTypeException
      *
-     * @return object
+     * @return ?object
      */
     public function cast($value)
     {
