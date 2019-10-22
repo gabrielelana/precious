@@ -233,4 +233,17 @@ class PreciousTest extends TestCase
         $this->assertTrue(isset($f->a), '$f->a is set');
         $this->assertTrue(isset($f->b), '$f->b is set');
     }
+
+    public function testWith()
+    {
+        $f = new F(['a' => 42, 'b' => 3.15]);
+        $f2 = $f->with(['b' => 5.34]);
+
+        $this->assertNotSame($f, $f2);
+
+        $this->assertEquals(
+            new F(['a' => 42, 'b' => 5.34]),
+            $f2,
+        );
+    }
 }
