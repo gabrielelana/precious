@@ -10,6 +10,13 @@
     }
   ],
   "minimum-stability": "stable",
+  "extra": {
+    "phpstan": {
+      "includes": [
+        "rules.neon"
+      ]
+    }
+  },
   "autoload": {
     "psr-4": {
       "Precious\\": [
