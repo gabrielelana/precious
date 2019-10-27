@@ -1,37 +1,40 @@
 {
-    "name": "gabrielelana/precious",
-    "description": "Library to build value objects",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "gabriele.lana",
-            "email": "gabriele.lana@cleancode.it"
-        }
-    ],
-    "minimum-stability": "stable",
-    "autoload": {
-        "psr-4": {
-            "Precious\\": ["./src", "./tests"]
-        }
-    },
-    "autoload-dev": {
-	"classmap": [
-            "tests/data/",
-            "tests/PHPStan/Rule/data/",
-            "tests/PHPStan/Reflection/data/"
-        ]
-    },
-    "require": {
-        "php": "~7.1"
-    },
-    "suggest": {
-        "phpstan/phpstan": "^0.11",
-        "nikic/php-parser": "^4.1"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^8.0",
-        "phpstan/phpstan": "^0.11",
-        "nikic/php-parser": "^4.1"
+  "name": "gabrielelana/precious",
+  "description": "Library to build value objects",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "gabriele.lana",
+      "email": "gabriele.lana@cleancode.it"
     }
+  ],
+  "minimum-stability": "stable",
+  "autoload": {
+    "psr-4": {
+      "Precious\\": [
+        "./src",
+        "./tests"
+      ]
+    }
+  },
+  "autoload-dev": {
+    "classmap": [
+      "tests/data/",
+      "tests/PHPStan/Rule/data/",
+      "tests/PHPStan/Reflection/data/"
+    ]
+  },
+  "require": {
+    "php": "~7.1"
+  },
+  "suggest": {
+    "phpstan/phpstan": "^0.11",
+    "nikic/php-parser": "^4.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8.0",
+    "phpstan/phpstan": "^0.11",
+    "nikic/php-parser": "^4.1"
+  }
 }

@@ -16,7 +16,7 @@ code.
 
 ## Usage
 
-``` php
+```php
 <?php
 
 use Precious\Precious;
@@ -55,7 +55,7 @@ assert($p1 == $p4);
 
 ## Installation
 
-``` shell
+```shell
 composer require gabrielelana/precious
 ```
 
@@ -73,14 +73,14 @@ information.
 Install the suggested dependencies to use `Precious` at its full
 potential.
 
-``` shell
+```shell
 composer require --dev phpstan/phpstan
 composer require --dev nikic/php-parser
 ```
 
 Add the custom rules in your project `phpstan.neon` file
 
-``` text
+```text
 includes:
   - %currentWorkingDirectory%/vendor/gabrielelana/precious/rules.neon
 
@@ -90,7 +90,7 @@ parameters:
 
 This what you should expect
 
-``` php
+```php
 <?php
 
 use Precious\Precious;
