@@ -78,7 +78,19 @@ composer require --dev phpstan/phpstan
 composer require --dev nikic/php-parser
 ```
 
-Add the custom rules in your project `phpstan.neon` file
+If you also install [phpstan/extension-installer](https://github.com/phpstan/extension-installer) with
+
+```shell
+composer require phpstan/extension-installer
+```
+
+then you're all set!
+
+<details>
+<summary>Otherwise follow the manual installation</summary>
+
+If you don't want to use `phpstan/extension-installer`, add the custom
+rules in your project `phpstan.neon` file
 
 ```text
 includes:
@@ -88,7 +100,9 @@ parameters:
   level: 7
 ```
 
-This what you should expect
+</details>
+
+then, this what you should expect
 
 ```php
 <?php
