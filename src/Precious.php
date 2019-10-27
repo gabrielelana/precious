@@ -100,6 +100,19 @@ abstract class Precious implements JsonSerializable
         return $this->parameters;
     }
 
+    /**
+     * Returns a new instance where the given fields replace existing ones.
+     */
+    public function with(array $parameters = [])
+    {
+        $class = static::class;
+
+        return new $class(array_merge(
+            $this->parameters,
+            $parameters
+        ));
+    }
+
     protected static function required(string $fieldName, Type $fieldType) : Field
     {
         return new RequiredField($fieldName, $fieldType);
