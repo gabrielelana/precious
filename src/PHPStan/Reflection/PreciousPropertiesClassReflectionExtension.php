@@ -3,13 +3,13 @@
 namespace Precious\PHPStan\Reflection;
 
 use PHPStan\Broker\Broker;
-use PHPStan\Reflection\BrokerAwareClassReflectionExtension;
+use PHPStan\Reflection\BrokerAwareExtension;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\PropertiesClassReflectionExtension;
 use PHPStan\Reflection\PropertyReflection;
 use Precious\Precious;
 
-class PreciousPropertiesClassReflectionExtension implements PropertiesClassReflectionExtension, BrokerAwareClassReflectionExtension
+class PreciousPropertiesClassReflectionExtension implements PropertiesClassReflectionExtension, BrokerAwareExtension
 {
     /** @var Broker */
     private $broker;
